@@ -1,21 +1,34 @@
 package re.edu.kha2.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import org.springframework.stereotype.Component;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-@Component
+@Entity
+@Builder
+@Table(name = "courses")
 public class Task {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String title;
-    private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TaskStatusEnum description;
+
+    @Column(nullable = false)
     private String priority;
+
+    @Column(nullable = false)
     private String assignedTo;
 
 }
